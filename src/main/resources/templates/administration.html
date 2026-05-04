@@ -1,0 +1,16 @@
+<h3>CHÀO MỪNG ĐẾN TRANG QUẢN TRỊ</h3>
+<table>
+    <tr><td><a th:href="@{/products/list_products}">list products</a></td></tr>
+
+    <tr><td>list user</td></tr>
+    <tr>
+        <!-- Nút Logout -->
+        <td>
+            <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </td>
+
+    </tr>
+</table>
