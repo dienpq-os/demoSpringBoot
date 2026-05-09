@@ -1,30 +1,15 @@
-// =============================================
-// common.js - Script chung cho toàn bộ dự án
-// =============================================
-
+/* HÀM DÙNG CHUNG*/
 document.addEventListener('DOMContentLoaded', function() {
-
-    // ==================== TỰ ĐỘNG ẨN THÔNG BÁO ====================
-    const successAlert = document.getElementById('successAlert');
-    if (successAlert) {
+    // Ẩn thông báo sau 5s
+    const tudongan = document.getElementById('tudongan');
+    if (tudongan) {
         setTimeout(() => {
-            successAlert.style.transition = 'opacity 0.5s ease';
-            successAlert.style.opacity = '0';
+            tudongan.style.transition = 'opacity 0.5s ease';
+            tudongan.style.opacity = '0';
             setTimeout(() => {
-                successAlert.style.display = 'none';
+                tudongan.style.display = 'none';
             }, 600);
         }, 5000);
-    }
-
-    const errorAlert = document.getElementById('errorAlert');
-    if (errorAlert) {
-        setTimeout(() => {
-            errorAlert.style.transition = 'opacity 0.5s ease';
-            errorAlert.style.opacity = '0';
-            setTimeout(() => {
-                errorAlert.style.display = 'none';
-            }, 600);
-        }, 7000);
     }
 
     // ==================== HỘP THOẠI XÁC NHẬN XÓA ====================

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm người dùng mới</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/my_style.css}">   
+
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4 text-center"><i class="bi bi-person-plus-fill"></i> Thêm người dùng mới</h2>
+
+                <!-- Hiển thị thông báo lỗi -->
+                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <form th:action="@{/users/save}" th:object="${user}" method="post" 
+                      class="shadow p-4 rounded bg-light" enctype="multipart/form-data">
+                    
+                    <div class="text-center mb-4">
+                        <!-- Khung ảnh thẻ 4x6 -->
+                        <div class="image4x6 shadow-sm">
+                            <img id="imgPreview" src="/images/default-avatar.png" 
+                                class="image4x6-preview" alt="Ảnh thẻ">
+                        </div>
+                        
+                        <!-- Nút điều khiển -->
+                        <div class="upload-btn-wrapper">
+                            <label for="avatarInput" class="btn btn-sm btn-dark">
+                                <i class="bi bi-image"></i> Chọn ảnh 4x6
+                            </label>
+                            <input type="file" id="avatarInput" name="avatar" class="d-none" accept="image/*">
+                        </div>
+                        <p class="text-muted small mt-1">Tỉ lệ chuẩn 4x6</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="example@gmail.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-bold">Username</label>
+                        <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Nhập tên đăng nhập" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label fw-bold">Quyền truy cập (Role)</label>
+                        <select class="form-select" id="role" th:field="*{role}" required>
+                            <option value="" selected disabled>-- Chọn quyền --</option>
+                            <option value="HANHCHINH">Hành Chính</option>
+                            <option value="KETOAN">Kế Toán</option>
+                            <option value="ADMIN">Giám Đốc (Admin)</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <a th:href="@{/users/list_users}" class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-arrow-left"></i> Quay lại
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-check-circle"></i> Lưu người dùng
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script xử lý xem trước ảnh -->
+    <script>
+        const avatarInput = document.getElementById('avatarInput');
+        const imgPreview = document.getElementById('imgPreview');
+
+        avatarInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgPreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+    
+    <!-- JS Bootstrap nội bộ -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

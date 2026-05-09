@@ -1,28 +1,68 @@
 package products.controller;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.io.IOException;
+import java.io.InputStream;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import jakarta.validation.Valid;
 import products.dto.ProductsDTO;
 import products.entity.ProductImage;
 import products.entity.Products;
 import products.service.ProductsService;
+
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import products.entity.Products;
+import products.service.ProductsService;
+
+import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import java.nio.file.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.*;
 
 @Controller
 public class WebController {
@@ -34,219 +74,280 @@ public class WebController {
         this.productsService = productsService;
     }
 
+    // --- ĐIỀU HƯỚNG TRANG CHỦ & LOGIN ---
     @GetMapping({ "/", "/home" })
     public String home() {
-        return "home"; // Trỏ đến file: templates/home.html
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/administration"; // Dùng redirect để trình duyệt gửi request mới
+        }
+        return "home";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // Trỏ đến file: templates/login.html
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/administration"; // Dùng redirect để trình duyệt gửi request mới
+        }
+        return "login";
     }
 
     @GetMapping("/administration")
     public String administration() {
-        return "administration"; // Trỏ đến file: templates/administration.html
+        return "administration";
     }
 
-    // List_products: Hiển thị danh sách điện thoại phân trang
+    // --- DANH SÁCH SẢN PHẨM (TỐI ƯU HIỆU NĂNG) ---
     @GetMapping("/products/list_products")
     public String list_products(@RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             Model model) {
 
-        Page<Products> productPage;
-
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            productPage = productsService.searchProductsPaginated(keyword.trim(), page, size);
-        } else {
-            productPage = productsService.getProductsPaginated(page, size);
-        }
-
-        // Tính tổng giá trị tồn kho
-        double tongGiaTriTonKho = productPage.getContent().stream()
-                .mapToDouble(p -> p.getGiaBan() * p.getSoLuong())
-                .sum();
+        Page<Products> productPage = productsService.searchProductsPaginated(keyword, page, size);
 
         model.addAttribute("productPage", productPage);
         model.addAttribute("listProducts", productPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
         model.addAttribute("countProducts", productPage.getTotalElements());
-        model.addAttribute("tongGiaTriTonKho", tongGiaTriTonKho);
         model.addAttribute("keyword", keyword);
 
-        return "products/list_products"; // Trỏ đến file: templates/products/list_products.html
+        // TỐI ƯU: Gọi thẳng hàm tính tổng tiền bằng SQL (rất nhanh)
+        model.addAttribute("tongGiaTriTonKho", productsService.calculateTotalInventoryValue());
+
+        return "products/list_products";
     }
 
-    // Hiển thị form thêm điện thoại mới
+    // Hiển thị Form thêm mới sản phẩm
     @GetMapping("/products/new_product")
     public String showNewProductForm(Model model) {
-        model.addAttribute("product", new ProductsDTO()); // Truyền đối tượng rỗng để binding form
-        return "products/new_product"; // Trỏ đến file: templates/products/new_product.html
+        model.addAttribute("product", new ProductsDTO());
+        return "products/new_product";
     }
 
-    // === PHẦN LƯU DỮ LIỆU ===
+    // --- LƯU SẢN PHẨM & XỬ LÝ ẢNH ---
     @PostMapping("/products/save_product")
     public String saveProduct(@Valid @ModelAttribute("product") ProductsDTO dto,
-            BindingResult bindingResult,
+            BindingResult result,
             @RequestParam(value = "images", required = false) MultipartFile[] images,
             @RequestParam(value = "mainImageIndex", defaultValue = "0") int mainImageIndex,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes ra, Model model) {
 
-        if (bindingResult.hasErrors()) {
+        if (result.hasErrors())
+            return "products/new_product";
+
+        if (productsService.existsProductsById(dto.getMaSP())) {
+            result.rejectValue("maSP", "error.product", "Mã sản phẩm này đã tồn tại!");
             return "products/new_product";
         }
 
-        // Lưu sản phẩm
-        Products product = new Products();
-        product.setMaSP(dto.getMaSP());
-        product.setTenModel(dto.getTenModel());
-        product.setHangSanXuat(dto.getHangSanXuat());
-        product.setGiaBan(dto.getGiaBan());
-        product.setSoLuong(dto.getSoLuong());
+        try {
+            // 1. Chuyển đổi DTO sang Entity
+            Products product = new Products();
+            product.setMaSP(dto.getMaSP());
+            product.setTenModel(dto.getTenModel());
+            product.setHangSanXuat(dto.getHangSanXuat());
+            product.setGiaBan(dto.getGiaBan());
+            product.setSoLuong(dto.getSoLuong());
 
-        Products savedProduct = productsService.saveProducts(product);
+            Products savedProduct = productsService.saveProducts(product);
 
-        // Upload ảnh và set ảnh chính
-        if (images != null && images.length > 0) {
-            for (int i = 0; i < images.length; i++) {
-                MultipartFile file = images[i];
-                if (!file.isEmpty()) {
-                    try {
-                        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-                        Path uploadDir = Paths.get("src/main/resources/static/images/products");
-                        Files.createDirectories(uploadDir);
-                        Path filePath = uploadDir.resolve(fileName);
-                        file.transferTo(filePath);
+            // 2. Xử lý upload ảnh (Có thể đưa vào Service để Controller sạch hơn)
+            if (images != null && images.length > 0) {
+                Path uploadDir = Paths.get("src/main/resources/static/images/products");
+                if (!Files.exists(uploadDir))
+                    Files.createDirectories(uploadDir);
+
+                for (int i = 0; i < images.length; i++) {
+                    if (!images[i].isEmpty()) {
+                        String fileName = System.currentTimeMillis() + "_" + images[i].getOriginalFilename();
+                        Files.copy(images[i].getInputStream(), uploadDir.resolve(fileName),
+                                StandardCopyOption.REPLACE_EXISTING);
 
                         ProductImage newImage = new ProductImage();
                         newImage.setImageUrl("/images/products/" + fileName);
-                        newImage.setMain(i == mainImageIndex); // Set ảnh chính
+                        newImage.setMain(i == mainImageIndex);
                         newImage.setProducts(savedProduct);
                         productsService.saveImage(newImage);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             }
+            ra.addFlashAttribute("mesage", "✅ Thêm sản phẩm thành công!");
+        } catch (Exception e) {
+            ra.addFlashAttribute("mesage", "❌ Lỗi khi lưu: " + e.getMessage());
         }
 
-        redirectAttributes.addFlashAttribute("success", "✅ Thêm sản phẩm thành công!");
         return "redirect:/products/list_products";
     }
 
-    // Hiển thị form sửa điện thoại
     @GetMapping("/products/edit_product/{maSP}")
-    public String showEditProductForm(@PathVariable("maSP") String maSP, Model model) {
-        Products proEntity = productsService.getProductsById(maSP)
-                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy product với maSP: " + maSP));
+    public String showEditForm(@PathVariable String maSP, Model model) {
+        Products product = productsService.getProductsById(maSP)
+                .orElseThrow(() -> new IllegalArgumentException("Mã SP không tồn tại: " + maSP));
 
-        // Chuyển Entity sang DTO để hiển thị trên form
+        // Chuyển từ Entity sang DTO để mapping vào Form
         ProductsDTO dto = new ProductsDTO();
-        dto.setMaSP(proEntity.getMaSP());
-        dto.setTenModel(proEntity.getTenModel());
-        dto.setHangSanXuat(proEntity.getHangSanXuat());
-        dto.setGiaBan(proEntity.getGiaBan());
-        dto.setSoLuong(proEntity.getSoLuong());
+        dto.setMaSP(product.getMaSP());
+        dto.setTenModel(product.getTenModel());
+        dto.setHangSanXuat(product.getHangSanXuat());
+        dto.setGiaBan(product.getGiaBan());
+        dto.setSoLuong(product.getSoLuong());
 
         model.addAttribute("product", dto);
-        // Truyền thêm danh sách ảnh vào model
-        model.addAttribute("images", proEntity.getImages()); // ← Thêm dòng này
-
-        return "products/edit_product"; // sẽ render file templates/products/edit_product.html
+        model.addAttribute("images", product.getImages()); // Dùng để hiển thị ảnh cũ
+        return "products/edit_product";
     }
 
     // Xử lý cập nhật điện thoại
     @PostMapping("/products/update_product/{maSP}")
     public String updateProduct(@PathVariable String maSP,
             @Valid @ModelAttribute("product") ProductsDTO dto,
-            BindingResult bindingResult,
-            @RequestParam(value = "images", required = false) MultipartFile[] images,
-            @RequestParam(value = "deleteImageIds", required = false) List<Long> deleteImageIds,
-            @RequestParam(value = "mainImageId", required = false) String mainImageIdStr, // String để nhận cả ID cũ và
-                                                                                          // new_
-            RedirectAttributes redirectAttributes) {
-
-        if (bindingResult.hasErrors()) {
+            BindingResult result,
+            @RequestParam(value = "images", required = false) MultipartFile[] images, // Khớp name="images"
+            @RequestParam(value = "deleteImageIds", required = false) List<Long> deleteImageIds, // Khớp
+                                                                                                 // name="deleteImageIds"
+            @RequestParam(value = "mainImageId", required = false) String mainImageId, // Nhận String vì có cả ID cũ và
+                                                                                       // "new_index"
+            RedirectAttributes ra) {
+        if (result.hasErrors())
             return "products/edit_product";
+
+        try {
+            productsService.updateFullProduct(maSP, dto, images, deleteImageIds, mainImageId);
+            ra.addFlashAttribute("success", "✅ Cập nhật sản phẩm thành công!");
+        } catch (Exception e) {
+            ra.addFlashAttribute("error", "❌ Lỗi: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        Products product = productsService.getProductsById(maSP)
-                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm với mã: " + maSP));
-
-        // Cập nhật thông tin
-        product.setTenModel(dto.getTenModel());
-        product.setHangSanXuat(dto.getHangSanXuat());
-        product.setGiaBan(dto.getGiaBan());
-        product.setSoLuong(dto.getSoLuong());
-
-        // Xóa ảnh được tick
-        if (deleteImageIds != null && !deleteImageIds.isEmpty()) {
-            for (Long imageId : deleteImageIds) {
-                productsService.deleteImageById(imageId);
-            }
-        }
-
-        // Lưu sản phẩm
-        Products savedProduct = productsService.saveProducts(product);
-
-        // Xử lý ảnh chính
-        if (mainImageIdStr != null && !mainImageIdStr.isEmpty()) {
-            if (mainImageIdStr.startsWith("new_")) {
-                // Ảnh chính là ảnh mới → sẽ xử lý sau khi upload
-            } else {
-                try {
-                    Long mainId = Long.parseLong(mainImageIdStr);
-                    productsService.setMainImage(maSP, mainId);
-                } catch (Exception ignored) {
-                }
-            }
-        }
-
-        // Upload ảnh mới
-        if (images != null && images.length > 0) {
-            int newImageIndex = 0;
-            for (MultipartFile file : images) {
-                if (!file.isEmpty()) {
-                    try {
-                        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-                        Path uploadDir = Paths.get("src/main/resources/static/images/products");
-                        Files.createDirectories(uploadDir);
-                        Path filePath = uploadDir.resolve(fileName);
-                        file.transferTo(filePath);
-
-                        ProductImage newImage = new ProductImage();
-                        newImage.setImageUrl("/images/products/" + fileName);
-                        newImage.setMain(false);
-                        newImage.setProducts(savedProduct);
-                        ProductImage savedImage = productsService.saveImage(newImage);
-
-                        // Kiểm tra xem ảnh này có phải là ảnh chính không
-                        if (mainImageIdStr != null && mainImageIdStr.equals("new_" + newImageIndex)) {
-                            productsService.setMainImage(maSP, savedImage.getId());
-                        }
-
-                        newImageIndex++;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        redirectAttributes.addFlashAttribute("success", "✅ Cập nhật thành công!");
         return "redirect:/products/list_products";
     }
 
     // Xóa điện thoại
     @GetMapping("/products/delete/{maSP}")
-    public String deleteProduct(@PathVariable("maSP") String maSP, RedirectAttributes redirectAttributes) {
-        productsService.deleteProducts(maSP);
-        redirectAttributes.addFlashAttribute("success", "✅ Xóa thành công!");
+    public String deleteProduct(@PathVariable("maSP") String maSP, RedirectAttributes ra) {
+        try {
+            // Gọi service xử lý toàn bộ: Xóa DB + Xóa file vật lý
+            productsService.deleteProducts(maSP);
+
+            ra.addFlashAttribute("success", "✅ Đã xóa sản phẩm và các ảnh liên quan thành công!");
+        } catch (Exception e) {
+            // Trường hợp không tìm thấy sản phẩm hoặc lỗi khóa ngoại
+            ra.addFlashAttribute("error", "❌ Lỗi khi xóa sản phẩm: " + e.getMessage());
+        }
+        // Quay về danh sách sản phẩm sau khi xóa
         return "redirect:/products/list_products";
+    }
+
+    // --- DASHBOARD (TỐI ƯU HIỆU NĂNG & XỬ LÝ JSON) ---
+    @Autowired
+    private ObjectMapper objectMapper; // Spring sẽ tự tiêm bean này vào, không cần 'new'
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        try {
+            // 1. Các chỉ số nhanh (Sử dụng các hàm Service đã tối ưu bằng SQL)
+            model.addAttribute("totalProducts", productsService.countTotalProducts());
+            model.addAttribute("totalInventoryValue", productsService.calculateTotalInventoryValue());
+            model.addAttribute("lowStockCount", productsService.countLowStockProducts(10));
+            model.addAttribute("outOfStockCount", productsService.countOutOfStockProducts());
+
+            // 2. Danh sách sản phẩm sắp hết hàng (vẫn dùng EntityGraph để load nhanh)
+            model.addAttribute("lowStockProducts", productsService.getLowStockProducts(10));
+
+            // 3. Xử lý JSON cho biểu đồ (Dùng ObjectMapper đã được Autowired)
+            Map<String, Long> brandStats = productsService.getProductsCountByBrand();
+            model.addAttribute("brandStatsJson", objectMapper.writeValueAsString(brandStats));
+
+        } catch (JsonProcessingException e) {
+            // Log lỗi và gửi một bản đồ trống nếu lỗi JSON để tránh lỗi Whitelabel
+            model.addAttribute("brandStatsJson", "{}");
+            System.err.println("Lỗi parse JSON Dashboard: " + e.getMessage());
+        }
+
+        return "dashboard";
+    }
+
+    // --- XUẤT PDF BÁO CÁO SẢN PHẨM TỒN KHO THẤP ---
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    @GetMapping("/dashboard/export-pdf")
+    public void exportToPDF(HttpServletResponse response) {
+        try {
+            // 1. Cấu hình Response để trình duyệt hiểu đây là file PDF
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=Bao_cao_ton_kho.pdf");
+
+            // 2. Lấy dữ liệu sản phẩm tồn kho thấp (< 10)
+            List<Products> lowStockList = productsService.getLowStockProducts(10);
+
+            // 3. Nạp Font tiếng Việt Arial (Dùng ResourceLoader để an toàn tuyệt đối)
+            Resource resource = resourceLoader.getResource("classpath:static/fonts/arial.ttf");
+            PdfFont vietnameseFont;
+
+            if (resource.exists()) {
+                try (InputStream is = resource.getInputStream()) {
+                    byte[] fontBytes = is.readAllBytes();
+                    vietnameseFont = PdfFontFactory.createFont(fontBytes, PdfEncodings.IDENTITY_H);
+                }
+            } else {
+                // Nếu lỗi không tìm thấy font, dùng font mặc định (sẽ mất dấu tiếng Việt nhưng
+                // không hỏng file)
+                System.err.println("!!! CẢNH BÁO: Không tìm thấy arial.ttf tại static/fonts/");
+                vietnameseFont = PdfFontFactory.createFont();
+            }
+
+            // 4. Khởi tạo iText PDF
+            PdfWriter writer = new PdfWriter(response.getOutputStream());
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+            document.setFont(vietnameseFont); // Áp dụng font tiếng Việt
+
+            // 5. Tiêu đề báo cáo
+            document.add(new Paragraph("BÁO CÁO SẢN PHẨM TỒN KHO THẤP")
+                    .setBold().setFontSize(18).setTextAlignment(TextAlignment.CENTER));
+
+            String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+            document.add(new Paragraph("Ngày xuất báo cáo: " + currentTime)
+                    .setItalic().setTextAlignment(TextAlignment.RIGHT).setMarginBottom(20));
+
+            // 6. Tạo bảng dữ liệu
+            // Định nghĩa tỉ lệ độ rộng các cột: 15% - 40% - 25% - 20%
+            float[] columnWidths = { 15, 40, 25, 20 };
+            Table table = new Table(UnitValue.createPercentArray(columnWidths));
+            table.setWidth(UnitValue.createPercentValue(100));
+
+            // Header của bảng
+            table.addHeaderCell(new Cell().add(new Paragraph("Mã SP").setBold()));
+            table.addHeaderCell(new Cell().add(new Paragraph("Tên Model").setBold()));
+            table.addHeaderCell(new Cell().add(new Paragraph("Hãng SX").setBold()));
+            table.addHeaderCell(new Cell().add(new Paragraph("Số lượng").setBold()));
+
+            // Đổ dữ liệu từ danh sách vào bảng
+            if (lowStockList != null && !lowStockList.isEmpty()) {
+                for (Products p : lowStockList) {
+                    table.addCell(new Cell().add(new Paragraph(p.getMaSP())));
+                    table.addCell(new Cell().add(new Paragraph(p.getTenModel())));
+                    table.addCell(new Cell().add(new Paragraph(p.getHangSanXuat())));
+                    table.addCell(new Cell().add(new Paragraph(String.valueOf(p.getSoLuong()))));
+                }
+            } else {
+                table.addCell(new Cell(1, 4).add(new Paragraph("Không có sản phẩm nào sắp hết hàng.")
+                        .setTextAlignment(TextAlignment.CENTER)));
+            }
+
+            // 7. Thêm bảng vào tài liệu và đóng luồng
+            document.add(table);
+            document.close();
+            System.out.println(">>> Xuất báo cáo PDF thành công!");
+
+        } catch (Exception e) {
+            System.err.println("!!! LỖI NGHIÊM TRỌNG KHI XUẤT PDF: " + e.getMessage());
+            e.printStackTrace();
+            // Không nên để response trống nếu lỗi, nhưng vì đã ghi vào OutputStream nên chỉ
+            // có thể log lỗi
+        }
     }
 }

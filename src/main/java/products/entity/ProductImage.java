@@ -1,9 +1,17 @@
 package products.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "product_image")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString(exclude = "products") // QUAN TRỌNG: Loại bỏ products khỏi toString để tránh lỗi StackOverflow
+@EqualsAndHashCode(exclude = "products") // QUAN TRỌNG: Tránh lỗi vòng lặp khi so sánh đối tượng
 public class ProductImage {
 
     @Id
@@ -18,47 +26,12 @@ public class ProductImage {
     private String imageUrl;
 
     @Column(name = "is_main", nullable = false)
-    private boolean isMain = false; // Ảnh chính
+    @Builder.Default
+    private boolean isMain = false;
 
-    // Constructors
-    public ProductImage() {
-    }
-
+    // Constructor tùy chỉnh cho việc tạo nhanh (giống bản gốc của bạn)
     public ProductImage(String imageUrl, boolean isMain) {
         this.imageUrl = imageUrl;
-        this.isMain = isMain;
-    }
-
-    // Getter & Setter
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Products getProducts() {
-        return products;
-    }
-
-    public void setProducts(Products products) {
-        this.products = products;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public boolean isMain() {
-        return isMain;
-    }
-
-    public void setMain(boolean isMain) {
         this.isMain = isMain;
     }
 }

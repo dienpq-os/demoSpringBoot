@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Người Dùng</title>
+    <!-- Sử dụng file nội bộ -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/my_style.css}">    
+<!-- Thêm style để con trỏ chuột biến thành hình bàn tay khi di chuyển vào dòng -->
+<style>
+    .clickable-row { cursor: pointer; }
+    .clickable-row:hover { background-color: #f1f4f9 !important; }
+</style>    
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h4 class="mb-0 text-primary"><i class="bi bi-people-fill"></i> Quản Lý Người Dùng</h4>
+                <a th:href="@{/users/new_user}" class="btn btn-primary">
+                    <i class="bi bi-person-plus"></i> Thêm Mới
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <!-- Thông báo thành công -->
+                <div th:if="${success}" id="tudongan" class="alert alert-success alert-dismissible fade show m-3" role="alert">
+                    <i class="bi bi-check-circle-fill"></i> <span th:text="${success}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">Ảnh</th>
+                                <th>Thông tin người dùng</th>
+                                <th>Quyền hạn</th>
+                                <th class="text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="u : ${listUsers}" class="clickable-row" 
+                                        th:data-href="@{/users/edit/{id}(id=${u.id})}">
+                                <td class="ps-4">
+                                    <!-- Hiển thị ảnh đại diện, nếu null dùng ảnh default -->
+                                    <img th:src="${u.imageUrl != null ? u.imageUrl : '/images/users/default-avatar.png'}" 
+                                         class="image4x6" alt="Avatar">
+                                </td>
+                                <td>
+                                    <div class="fw-bold" th:text="${u.username}">Username</div>
+                                    <div class="small text-muted" th:text="${u.email}">email@example.com</div>
+                                </td>
+                                <td>
+                                    <!-- Hiển thị Badge màu sắc theo Role -->
+                                    <span th:if="${u.role == 'ADMIN'}" class="badge bg-danger role-badge">Giám Đốc</span>
+                                    <span th:if="${u.role == 'KETOAN'}" class="badge bg-success role-badge">Kế Toán</span>
+                                    <span th:if="${u.role == 'HANHCHINH'}" class="badge bg-info text-dark role-badge">Hành Chính</span>
+                                    <span th:if="${u.role != 'ADMIN' && u.role != 'KETOAN' && u.role != 'HANHCHINH'}" 
+                                          class="badge bg-secondary role-badge" th:text="${u.role}">User</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a th:href="@{/users/edit/{id}(id=${u.id})}" class="btn btn-sm btn-outline-primary" title="Sửa">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-outline-danger" title="Xóa"
+                                                th:onclick="'confirmDelete(' + ${u.id} + ')'">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(listUsers)}">
+                                <td colspan="4" class="text-center py-5 text-muted">Chưa có người dùng nào trong hệ thống.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white py-3">
+                <a th:href="@{/administration}" class="btn btn-link text-decoration-none">
+                    <i class="bi bi-arrow-left"></i> Quay lại trang quản trị
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS để nút đóng thông báo hoạt động -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script>
+        function confirmDelete(id) {
+            if(confirm('Bạn có chắc chắn muốn xóa người dùng này không?')) {
+                window.location.href = '/users/delete/' + id;
+            }
+        }
+    </script>
+
+
+<!-- Thêm đoạn Script này vào cuối file list_users.html -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll(".clickable-row");
+        rows.forEach(row => {
+            row.addEventListener("click", () => {
+                window.location.href = row.dataset.href;
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

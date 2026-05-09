@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa người dùng</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">   
+
+    <style>
+        .avatar-wrapper { width: 120px; height: 180px; margin: 0 auto; border: 2px solid #ddd; overflow: hidden; background: #f8f9fa; }
+        .avatar-preview { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 card shadow p-4 border-0 rounded-4">
+                <h3 class="mb-4 text-center text-primary">Hiệu chỉnh người dùng</h3>
+                
+                <form th:action="@{/users/update/{id}(id=${user.id})}" th:object="${user}" 
+                      method="post" enctype="multipart/form-data">
+                    
+                    <!-- Khung ảnh thẻ 4x6 -->
+                    <div class="text-center mb-4">
+                        <div class="avatar-wrapper shadow-sm rounded">
+                            <img id="imgPreview" th:src="*{imageUrl != null ? imageUrl : '/images/default-avatar.png'}" 
+                                 class="avatar-preview">
+                        </div>
+                        <label for="avatarInput" class="btn btn-sm btn-dark mt-2">
+                            <i class="bi bi-camera"></i> Thay ảnh thẻ
+                        </label>
+                        <input type="file" id="avatarInput" name="avatar" class="d-none" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Username</label>
+                        <input type="text" th:field="*{username}" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Email</label>
+                        <input type="email" th:field="*{email}" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Quyền hạn (Role)</label>
+                        <select th:field="*{role}" class="form-select">
+                            <option value="HANHCHINH">Hành Chính</option>
+                            <option value="KETOAN">Kế Toán</option>
+                            <option value="ADMIN">Giám Đốc (Admin)</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a th:href="@{/users/list_users}" class="btn btn-outline-secondary px-4">Hủy</a>
+                        <button type="submit" class="btn btn-primary px-4">Lưu thay đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('avatarInput').onchange = function (evt) {
+            const [file] = this.files;
+            if (file) document.getElementById('imgPreview').src = URL.createObjectURL(file);
+        };
+    </script>
+</body>
+</html>
