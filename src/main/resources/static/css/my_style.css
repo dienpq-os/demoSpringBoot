@@ -271,3 +271,39 @@ tr:hover {
     .preview-item input[type="radio"] { position: absolute; top: 8px; left: 8px; z-index: 10; }
     .old-image { border: 2px solid #28a745; }
 
+    .user-card { 
+        cursor: pointer; 
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #eee;
+    }
+    .user-card:hover {
+        border-color: #0d6efd;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    }
+    .action-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        opacity: 0; 
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+    }
+    .user-card.active .action-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+    /* Đảm bảo nút bấm luôn nằm trên cùng của lớp phủ */
+    .action-overlay .btn {
+        position: relative;
+        z-index: 20;
+    }
+    .avatar-box {
+        width: 80px; height: 100px; object-fit: cover; border-radius: 4px;
+    }

@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Hệ thống Quản trị</title>
+        <!-- Favicon -->
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
     <!-- Sử dụng Bootstrap nội bộ để giao diện đẹp ngay lập tức -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-icons.min.css}" rel="stylesheet">
     <style>
         body { background-color: #f8f9fa; }
         .admin-card { max-width: 500px; margin: 50px auto; border-radius: 15px; }
@@ -24,8 +29,15 @@
             <div class="card-body p-4">
                 <div class="text-center mb-4">
                     <!-- Hiển thị tên người dùng đang đăng nhập -->
-                    <h5 class="mb-1">Xin chào, <span class="text-primary" sec:authentication="name">User</span>!</h5>
-                    <p class="text-muted small">Quyền: <span sec:authentication="principal.authorities"></span></p>
+                    <h5 class="mb-1">Xin chào, <span class="text-primary" >[[${username}]]</span>!</h5>
+                    <p class="text-muted small">
+                        Quyền: 
+                        <span th:if="${role == 'ROLE_ADMIN'}" class="badge bg-danger px-3 py-2 fs-7 shadow-sm"><i class="bi bi-shield-fill-check me-1"></i> BAN QUẢN TRỊ (ADMIN)</span>
+                        <span th:if="${role == 'ROLE_HANHCHINH'}" class="badge bg-info text-dark px-3 py-2 fs-7 shadow-sm"><i class="bi bi-briefcase-fill me-1"></i> PHÒNG HÀNH CHÍNH</span>
+                        <span th:if="${role == 'ROLE_KETOAN'}" class="badge bg-success px-3 py-2 fs-7 shadow-sm"><i class="bi bi-calculator-fill me-1"></i> PHÒNG KẾ TOÁN</span>
+                        <span th:if="${role == 'ROLE_USER'}" class="badge bg-secondary px-3 py-2 fs-7 shadow-sm"><i class="bi bi-person-fill me-1"></i> CHƯA PHÂN QUYỀN</span>
+                        
+                    </p>
                 </div>
 
                 <div class="list-group">
@@ -47,11 +59,16 @@
 
         <!-- Chèn đoạn này vào phía trên Form đăng nhập -->
         <div class="container mt-3">
-            <!-- Hiển thị thông báo thành công từ RedirectAttributes (Flash) -->
-            <div th:if="${success}" id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-check-circle-fill"></i> <span th:text="${success}"></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+                <!-- Hiển thị thông báo thành công từ RedirectAttributes (Flash) -->
+                <div th:if="${success}" id="tudongan" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill"></i> <span th:text="${success}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- Hiển thị thông báo lỗi -->
+                <div th:if="${error}" id="tudongan" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
 
                 <form th:action="@{/logout}" method="post" class="text-center">
                     <button type="submit" class="btn btn-danger w-100">

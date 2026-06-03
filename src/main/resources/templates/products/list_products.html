@@ -1,182 +1,282 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Cửa Hàng Điện Thoại</title>    
-    <!-- Bootstrap 5 + Icons -->
+    <!-- Khai báo đường dẫn tài nguyên tĩnh nội bộ dự án -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
-   
+    <link th:href="@{/css/bootstrap-icons.min.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/my_style.css}">    
     <script th:src="@{/js/my_script.js}"></script>
+    <style>
+        /* Cấu hình vị trí tương đối cho hàng dữ liệu để làm tâm neo giữ actions */
+        .clickable-product-row {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            position: relative;
+        }
+        .clickable-product-row:hover {
+            background-color: #f1f3f5 !important;
+        }
+        
+        /* ------------------------------------------------------------------------- */
+        /* ĐỒNG BỘ NỀN TRẮNG MỜ CỦA TRANG USER: Sửa lỗi không bị mất dòng thông tin */
+        /* ------------------------------------------------------------------------- */
+        .action-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95); /* Nền trắng mờ che thông tin cũ giống trang user */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+            z-index: 100; /* Đẩy lên trên cùng để đè lên các ô chữ */
+        }
+        /* Hiển thị bung ra khi hàng nhận class active từ JavaScript click chuột */
+        .clickable-product-row.active .action-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Định dạng hình dáng và màu sắc 2 nút lệnh giống hệt trang người dùng của bạn */
+        .action-overlay .btn-custom-edit {
+            background-color: #0d6efd !important; /* Xanh dương đậm chuẩn Bootstrap */
+            color: #ffffff !important;
+            border: none !important;
+            padding: 6px 20px !important;
+            font-weight: 500;
+            border-radius: 6px !important;
+            text-decoration: none;
+        }
+        .action-overlay .btn-custom-delete {
+            background-color: #dc3545 !important; /* Đỏ đặc chuẩn Bootstrap */
+            color: #ffffff !important;
+            border: none !important;
+            padding: 6px 20px !important;
+            font-weight: 500;
+            border-radius: 6px !important;
+        }
+    </style>
 </head>
-<body>
-    <div class="container mt-4">
-        <!-- Header -->
+<!-- Bắt sự kiện click ra ngoài bảng để ẩn 2 nút giống hệt trang user -->
+<body class="bg-light" onclick="clearAllSelection(event)">
+    <div class="container mt-4" id="mainContainer">
+        <!-- Header thông tin tài khoản người dùng -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h1 class="mb-1">📱 Quản Lý Cửa Hàng Điện Thoại</h1>
-                <p class="text-muted">Quản lý sản phẩm chuyên nghiệp</p>
+                <p class="text-muted">Hệ thống quản lý sản phẩm chuyên nghiệp (Clean Architecture)</p>
             </div>
             <div class="d-flex align-items-center gap-3">
-                <span class="fw-bold">Xin chào, <span sec:authentication="name">Admin</span></span>
+                <span class="fw-bold">Xin chào, <span class="text-primary" sec:authentication="name">Admin</span></span>
                 <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <button type="submit" class="btn btn-outline-danger btn-sm fw-bold">
                         <i class="bi bi-box-arrow-right"></i> Đăng xuất
                     </button>
                 </form>
             </div>
         </div>
 
-        <!-- Thông báo -->
-        <div th:if="${mesage}" id="tudongan" class="alert alert-success alert-dismissible fade show">
-            <i class="bi bi-check-circle-fill"></i> <span th:text="${mesage}"></span>
+        <!-- Khối hiển thị thông báo phản hồi từ hệ thống -->
+        <div th:if="${mesage}" id="tudonganSuccess" class="alert alert-success alert-dismissible fade show shadow-sm">
+            <i class="bi bi-check-circle-fill me-2"></i> <span th:text="${mesage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <div th:if="${error}" id="tudonganError" class="alert alert-danger alert-dismissible fade show shadow-sm">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> <span th:text="${error}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
 
-        <!-- Thống kê -->
+        <!-- Khối thẻ hiển thị thông số thống kê nhanh Dashboard -->
         <div class="row mb-4 g-3">
             <div class="col-md-4">
-                <div class="card text-center bg-primary text-white">
-                    <div class="card-body">
-                        <h5>Tổng sản phẩm</h5>
-                        <h2 th:text="${countProducts}"></h2>
+                <div class="card text-center bg-primary text-white shadow-sm border-0" style="border-radius: 12px;">
+                    <div class="card-body py-4">
+                        <h5><i class="bi bi-box-seam-fill"></i> Tổng sản phẩm</h5>
+                        <h2 class="fw-bold mt-2" th:text="${countProducts != null ? countProducts : 0}">0</h2>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center bg-success text-white">
-                    <div class="card-body">
-                        <h5>Tổng giá trị tồn kho</h5>
-                        <h2 th:text="${#numbers.formatCurrency(tongGiaTriTonKho)}"></h2>
+                <div class="card text-center bg-success text-white shadow-sm border-0" style="border-radius: 12px;">
+                    <div class="card-body py-4">
+                        <h5><i class="bi bi-cash-stack"></i> Tổng giá trị tồn kho</h5>
+                        <h2 class="fw-bold mt-2" th:text="${tongGiaTriTonKho != null ? #numbers.formatInteger(tongGiaTriTonKho, 0, 'COMMA') + ' VNĐ' : '0 VNĐ'}">0 VNĐ</h2>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <a th:href="@{/products/new_product}" class="btn btn-success w-100 py-3">
-                            <i class="bi bi-plus-circle"></i> Thêm sản phẩm mới
+                <div class="card text-center shadow-sm border-0 h-100 d-flex align-items-center justify-content-center" style="border-radius: 12px;">
+                    <div class="card-body w-100 p-4">
+                        <a th:href="@{/products/new_product}" class="btn btn-success w-100 py-3 fw-bold fs-5 shadow-sm">
+                            <i class="bi bi-plus-circle-fill"></i> THÊM SẢN PHẨM MỚI
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tìm kiếm -->
-        <div class="mb-4">
+        <!-- Thanh công cụ tìm kiếm dữ liệu -->
+        <div class="mb-4 bg-light p-3 rounded border shadow-sm">
             <form th:action="@{/products/list_products}" method="get" class="d-flex gap-2">
                 <input type="text" name="keyword" th:value="${keyword}" 
-                       class="form-control" placeholder="Tìm theo mã SP, tên model hoặc hãng...">
-                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                <a th:href="@{/products/list_products}" class="btn btn-secondary">Xóa</a>
-                <a th:href="@{/administration}" class="btn btn-secondary me-2">Quay lại</a>
+                       class="form-control form-control-lg" placeholder="Tìm kiếm nhanh theo mã sản phẩm, tên model máy hoặc hãng sản xuất...">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-search"></i> Tìm</button>
+                <a th:href="@{/products/list_products}" class="btn btn-secondary d-flex align-items-center">Xóa lọc</a>
+                <a th:href="@{/administration}" class="btn btn-dark d-flex align-items-center px-3"><i class="bi bi-speedometer2 me-1"></i> Quản trị</a>
             </form>
         </div>
-    </div>
-    <!-- Bảng danh sách -->
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>Ảnh</th>
-                    <th>STT</th>
-                    <th>Mã SP</th>
-                    <th>Tên Model</th>
-                    <th>Hãng</th>
-                    <th>Giá bán</th>
-                    <th>Số lượng</th>
-                    <th>Trạng thái</th>
-                    <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="product, loop : ${listProducts}">
-                    <td>
-                    <!-- Ưu tiên hiển thị ảnh chính -->
-                    <div th:if="${product.images != null and not #lists.isEmpty(product.images)}">
-                        <!-- Tìm ảnh chính trước -->
-                        <img th:if="${#lists.size(product.images.?[isMain == true]) > 0}" 
-                            th:src="${product.images.?[isMain == true][0].imageUrl}" 
-                            alt="Ảnh chính" class="img-thumbnail"
-                            style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #007bff;">
 
-                        <!-- Nếu không có ảnh chính thì lấy ảnh đầu tiên -->
-                        <img th:unless="${#lists.size(product.images.?[isMain == true]) > 0}" 
-                            th:src="${product.images[0].imageUrl}" alt="Ảnh sản phẩm" 
-                            class="img-thumbnail"
-                            style="width: 80px; height: 80px; object-fit: cover;">
-                    </div>    
-                    <!-- Không có ảnh -->
-                    <div th:unless="${product.images != null and not #lists.isEmpty(product.images)}" 
-                        class="text-muted text-center">Không có ảnh
-                    </div>
-                    </td>
-                    <td th:text="${loop.index + 1 + currentPage * 10}"></td> <!-- STT theo trang -->
-                    <td th:text="${product.maSP}"></td>
-                    <td th:text="${product.tenModel}"></td>
-                    <td th:text="${product.hangSanXuat}"></td>
-                    <td th:text="${#numbers.formatInteger(product.giaBan, 0, 'COMMA')} + ' VNĐ'"></td>
-                    <td th:text="${product.soLuong}"></td>
-                    <td>
-                        <span th:if="${product.soLuong >= 10}" class="badge bg-success">Còn hàng</span>
-                        <span th:if="${product.soLuong > 0 && product.soLuong < 10}" class="badge bg-warning">Sắp hết</span>
-                        <span th:if="${product.soLuong == 0}" class="badge bg-danger">Hết hàng</span>
-                    </td>
-                    <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                        <a th:href="@{/products/edit_product/{maSP}(maSP=${product.maSP})}" 
-                        class="btn btn-warning btn-sm me-1">Sửa</a>
-                        <a th:href="@{/products/delete/{maSP}(maSP=${product.maSP})}" 
-                        class="btn btn-danger btn-sm"
-                        onclick="return confirm('Xóa sản phẩm này?')">Xóa</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Phân trang -->
-    <div th:if="${totalPages > 1}" class="d-flex justify-content-center mt-4">
-        <nav>
-            <ul class="pagination">
-                <!-- Nút Previous -->
-                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                    <a class="page-link" 
-                    th:href="@{/products/list_products(page=${currentPage - 1}, keyword=${keyword})}">Trước</a>
-                </li>
-                <!-- Các số trang -->
-                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" 
-                    class="page-item"
-                    th:classappend="${i == currentPage} ? 'active'">
-                    <a class="page-link" 
-                    th:href="@{/products/list_products(page=${i}, keyword=${keyword})}" 
-                    th:text="${i + 1}"></a>
-                </li>
+        <!-- Bảng hiển thị danh sách sản phẩm phân trang -->
+        <div class="table-responsive shadow-sm rounded border bg-white" id="productTableWrapper">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th style="width: 110px;">Ảnh chính</th>
+                        <th style="width: 70px;">STT</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên Model máy</th>
+                        <th>Hãng sản xuất</th>
+                        <th>Giá bán hiện tại</th>
+                        <th>Số lượng tồn</th>
+                        <th>Trạng thái kho</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sự kiện click hoạt động đồng bộ với trang user-card của bạn -->
+                    <tr th:each="product, loop : ${listProducts}" 
+                        class="clickable-product-row" 
+                        th:id="'row-' + ${product.maSP}"
+                        onclick="toggleActions(event, this)">
+                        
+                        <!-- Cột hiển thị hình ảnh sản phẩm -->
+                        <td class="text-center">
+                            <div th:if="${product.images != null && !product.images.isEmpty()}">
+                                <th:block th:each="img : ${product.images}">
+                                    <img th:if="${img.isMain}" th:src="@{${img.imageUrl}}" 
+                                         alt="Ảnh chính" class="img-thumbnail shadow-sm"
+                                         style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #007bff;">
+                                </th:block>
+                            </div>    
+                            <div th:if="${product.images == null || product.images.isEmpty()}">
+                                <img th:src="@{/images/products/default.png}" 
+                                    alt="Không có ảnh" class="img-thumbnail shadow-sm"
+                                    style="width: 80px; height: 80px; object-fit: cover; opacity: 0.6;">
+                            </div>
+                        </td>
+                        
+                        <td class="text-center fw-semibold" th:text="${loop.index + 1 + currentPage * 10}"></td>
+                        <td class="fw-bold text-dark text-center" th:text="${product.maSP}"></td>
+                        
+                        <!-- GIẢI PHÁP SỬA LỖI: Đặt lớp phủ action-overlay vào ô Tên máy để không làm mất các dòng thông tin -->
+                        <!-- Khi click vào hàng, JavaScript bật class .active lên thẻ <tr>, lớp phủ này sẽ tự động bung rộng 100% diện tích đè lên dòng -->
+                        <td class="fw-semibold text-primary">
+                            <span th:text="${product.tenModel}"></span>
+                            
+                            <!-- Lớp phủ chứa 2 nút lệnh Sửa và Xóa phong cách trang user -->
+                            <div class="action-overlay" sec:authorize="hasRole('ADMIN')" onclick="event.stopPropagation();">
+                                <a th:href="@{/products/edit_product/{maSP}(maSP=${product.maSP})}" class="btn btn-custom-edit shadow-sm">
+                                    <i class="bi bi-pencil-square"></i> Sửa
+                                </a>
+                                <button type="button" class="btn btn-custom-delete shadow-sm" 
+                                        th:onclick="confirmDelete(event, [[${product.maSP}]])">
+                                    <i class="bi bi-trash-fill"></i> Xóa
+                                </button>
+                            </div>
+                        </td>
+                        
+                        <td th:text="${product.hangSanXuat}"></td>
+                        <td class="text-danger fw-bold text-end pe-3" th:text="${product.giaBan != null ? #numbers.formatInteger(product.giaBan, 0, 'COMMA') + ' VNĐ' : '0 VNĐ'}"></td>
+                        <td class="text-center fw-bold" th:text="${product.soLuong}"></td>
+                        <td class="text-center">
+                            <span th:if="${product.soLuong >= 10}" class="badge bg-success px-3 py-2">Còn hàng</span>
+                            <span th:if="${product.soLuong > 0 && product.soLuong < 10}" class="badge bg-warning text-dark px-3 py-2">Sắp hết hàng</span>
+                            <span th:if="${product.soLuong == 0}" class="badge bg-danger px-3 py-2">Hết hàng</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                <!-- Nút Next -->
-                <li class="page-item" th:classappend="${currentPage >= totalPages - 1} ? 'disabled'">
-                    <a class="page-link" 
-                    th:href="@{/products/list_products(page=${currentPage + 1}, keyword=${keyword})}">Sau</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="empty" th:if="${listProducts.isEmpty()}">
-        <p>Chưa có điện thoại nào trong hệ thống.</p>
-        <a href="/products/new_product" class="btn btn-add">Thêm sản phẩm đầu tiên</a>
-    </div>
+        <!-- Khối hiển thị thông báo khi mảng danh sách trống -->
+        <div class="alert alert-info text-center mt-4 shadow-sm" th:if="${listProducts == null || listProducts.isEmpty()}">
+            <i class="bi bi-info-circle-fill me-2 fs-5"></i> Không tìm thấy bất kỳ sản phẩm điện thoại nào phù hợp với bộ lọc hiện tại.
+        </div>
 
-    <!-- Custom Confirm Dialog -->
-    <div id="confirmDialog" class="dialog-overlay">
-        <div class="dialog-box">
-            <h3>🗑️ Xác nhận xóa</h3>
-            <p id="confirmMessage"></p>
-            <div class="dialog-box h3">
-                <button id="confirmCancel">Hủy</button>
-                <button id="confirmOk">Xóa</button>
-            </div>
+        <!-- Thanh phân trang trung tâm -->
+        <div th:if="${totalPages > 1}" class="d-flex justify-content-center mt-4 mb-5">
+            <nav>
+                <ul class="pagination shadow-sm">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link px-3" th:href="@{/products/list_products(page=${currentPage - 1}, keyword=${keyword})}">Trước</a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" class="page-item" th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link px-3" th:href="@{/products/list_products(page=${i}, keyword=${keyword})}" th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage >= totalPages - 1} ? 'disabled'">
+                        <a class="page-link px-3" th:href="@{/products/list_products(page=${currentPage + 1}, keyword=${keyword})}">Sau</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+
+    <!-- Nhúng thư viện Javascript đầy đủ của Bootstrap -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- SCRIPT JAVASCRIPT ĐỒNG BỘ TUYỆT ĐỐI VỚI LOGIC CỦA TRANG USER-CARD -->
+    <script sec:authorize="hasRole('ADMIN')">
+        function toggleActions(event, row) {
+            // Chặn sự kiện nổi bọt lên thẻ body
+            event.stopPropagation();
+            
+            // Duyệt xóa trạng thái active hiển thị của toàn bộ các hàng khác trong bảng
+            document.querySelectorAll('.clickable-product-row').forEach(r => {
+                if (r !== row) {
+                    r.classList.remove('active');
+                    const overlay = r.querySelector('.action-overlay');
+                    if (overlay) overlay.style.pointerEvents = 'none';
+                }
+            });
+            
+            // Bật / Tắt class active để đóng mở lớp phủ mờ chứa 2 nút của dòng vừa bấm
+            const isActive = row.classList.toggle('active');
+            const overlay = row.querySelector('.action-overlay');
+            if (overlay) {
+                overlay.style.pointerEvents = isActive ? 'auto' : 'none';
+            }
+        }
+
+        // Click ra khoảng trống ngoài bảng sản phẩm -> Tự động ẩn sạch các nút bấm đang mở giống trang user
+        function clearAllSelection(event) {
+            if (!event.target.closest('.clickable-product-row')) {
+                document.querySelectorAll('.clickable-product-row').forEach(r => {
+                    r.classList.remove('active');
+                    const overlay = r.querySelector('.action-overlay');
+                    if (overlay) overlay.style.pointerEvents = 'none';
+                });
+            }
+        }
+
+        function confirmDelete(event, maSP) {
+            // Chặn hành vi mặc định và ngăn nổi bọt làm ẩn lớp phủ ngay lập tức
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            if (confirm('Hệ thống sẽ thực hiện xóa bản ghi CSDL và file ảnh vật lý. Bạn có chắc chắn muốn xóa sản phẩm mã ' + maSP + ' này không?')) {
+                window.location.href = '/products/delete/' + maSP;
+            }
+        }
+    </script>
 </body>
 </html>

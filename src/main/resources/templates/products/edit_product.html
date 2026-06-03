@@ -1,93 +1,139 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sửa Sản Phẩm</title>
+    <title>Sửa Sản Phẩm & Album Ảnh</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
-
+    <link th:href="@{/css/bootstrap-icons.min.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/my_style.css}">    
+    <style>
+        .preview-item {
+            width: 150px;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: #fff;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .preview-img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .preview-item.is-main-active {
+            border-color: #0d6efd;
+            background-color: #f0f6ff;
+            box-shadow: 0 2px 8px rgba(13, 110, 253, 0.2);
+        }
+        .delete-overlay {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 4px;
+            padding: 2px 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card shadow">
-                    <div class="card-header bg-warning text-dark">
-                        <h4 class="mb-0"><i class="bi bi-pencil-square"></i> Sửa Sản Phẩm</h4>
+                <div class="card shadow border-0" style="border-radius: 15px;">
+                    <div class="card-header bg-warning text-dark py-3" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        <h4 class="mb-0 fw-bold"><i class="bi bi-pencil-square"></i> Sửa Sản Phẩm & Album Ảnh</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-4">
 
                         <form th:action="@{/products/update_product/{maSP}(maSP=${product.maSP})}" 
                               method="post" th:object="${product}" enctype="multipart/form-data" novalidate>
 
-                            <!-- Lỗi validation -->
-                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            <!-- Khối hiển thị thông báo lỗi Validation -->
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissible fade show">
                                 <strong>Vui lòng sửa các lỗi sau:</strong>
-                                <ul class="mb-0">
+                                <ul class="mb-0 mt-2">
                                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
                                 </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
 
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label class="form-label">Mã sản phẩm</label>
-                                    <input type="text" th:field="*{maSP}" class="form-control" readonly>
+                                    <label class="form-label fw-semibold text-muted">Mã sản phẩm (Readonly)</label>
+                                    <input type="text" th:field="*{maSP}" class="form-control bg-light fw-bold" readonly>
                                 </div>
                                 <div class="col-md-8">
-                                    <label class="form-label">Tên Model <span class="text-danger">*</span></label>
-                                    <input type="text" th:field="*{tenModel}" class="form-control">
+                                    <label class="form-label fw-semibold">Tên Model <span class="text-danger">*</span></label>
+                                    <input type="text" th:field="*{tenModel}" class="form-control" th:classappend="${#fields.hasErrors('tenModel')} ? 'is-invalid'">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Hãng sản xuất <span class="text-danger">*</span></label>
-                                    <input type="text" th:field="*{hangSanXuat}" class="form-control">
+                                    <label class="form-label fw-semibold">Hãng sản xuất <span class="text-danger">*</span></label>
+                                    <input type="text" th:field="*{hangSanXuat}" class="form-control" th:classappend="${#fields.hasErrors('hangSanXuat')} ? 'is-invalid'">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">Giá bán <span class="text-danger">*</span></label>
-                                    <input type="number" th:field="*{giaBan}" class="form-control">
+                                    <label class="form-label fw-semibold">Giá bán <span class="text-danger">*</span></label>
+                                    <input type="number" th:field="*{giaBan}" class="form-control" th:classappend="${#fields.hasErrors('giaBan')} ? 'is-invalid'">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">Số lượng <span class="text-danger">*</span></label>
-                                    <input type="number" th:field="*{soLuong}" class="form-control">
+                                    <label class="form-label fw-semibold">Số lượng <span class="text-danger">*</span></label>
+                                    <input type="number" th:field="*{soLuong}" class="form-control" th:classappend="${#fields.hasErrors('soLuong')} ? 'is-invalid'">
                                 </div>
 
-                                <!-- Ảnh cũ -->
+                                <hr class="my-4">
+
+                                <!-- KHỐI 1: QUAN SÁT & QUẢN LÝ ALBUM ẢNH CŨ TRONG CSDL -->
                                 <div class="col-12">
-                                    <label class="form-label">Ảnh hiện tại</label>
-                                    <div id="oldImagesContainer" class="d-flex flex-wrap gap-3">
-                                        <div th:each="img : ${images}" class="preview-item">
-                                            <img th:src="${img.imageUrl}" class="preview-img old-image">
-                                            <div class="mt-2">
-                                                <input type="radio" name="mainImageId" th:value="${img.id}" 
-                                                       th:checked="${img.isMain}">
-                                                <label class="small">Ảnh chính</label>
+                                    <label class="form-label fw-semibold text-secondary"><i class="bi bi-images"></i> Album ảnh hiện tại trong hệ thống</label>
+                                    <div id="oldImagesContainer" class="d-flex flex-wrap gap-3 p-3 bg-light rounded border">
+                                        
+                                        <!-- Duyệt qua mảng biến độc lập albumImages để nhận dữ liệu an toàn -->
+                                        <div th:each="img : ${albumImages}" class="preview-item" th:classappend="${img.isMain} ? 'is-main-active'" th:id="'old_item_' + ${img.id}">
+                                            <img th:src="@{${img.imageUrl}}" class="preview-img old-image" alt="Ảnh cũ">
+
+                                            <!-- Ô tích chọn thay đổi vai trò ảnh chính -->
+                                            <div class="form-check d-flex justify-content-center align-items-center mt-2">
+                                                <input class="form-check-input old-radio-main" type="radio" name="mainImageId" 
+                                                    th:value="${img.id}" th:checked="${img.isMain}" th:id="'main_' + ${img.id}">
+                                                <label class="form-check-label small ms-1" th:for="'main_' + ${img.id}">Ảnh chính</label>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" 
-                                                       th:name="deleteImageIds" th:value="${img.id}">
-                                                <label class="form-check-label text-danger small">Xóa</label>
+
+                                            <!-- Ô hộp kiểm checkbox đánh dấu xóa hình ảnh -->
+                                            <div class="delete-overlay form-check mb-0">
+                                                <input class="form-check-input check-delete-img" type="checkbox" 
+                                                    name="deleteImageIds" th:value="${img.id}" th:id="'del_' + ${img.id}">
+                                                <label class="form-check-label text-danger small fw-bold" th:for="'del_' + ${img.id}">Xóa</label>
                                             </div>
+                                        </div>
+                                        
+                                        <!-- ĐỔI THÀNH: Kiểm tra danh sách biến độc lập albumImages thông qua thuộc tính .isEmpty() của Java hoặc #lists.isEmpty() -->
+                                        <div th:if="${albumImages == null || albumImages.isEmpty()}" class="text-muted small w-100 text-center py-2">
+                                            <i class="bi bi-image-alt"></i> Sản phẩm này hiện chưa có hình ảnh nào trong hệ thống.
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Thêm ảnh mới -->
-                                <div class="col-12">
-                                    <label class="form-label">Thêm ảnh mới (có thể chọn nhiều)</label>
+                                <!-- KHỐI 2: CHỌN THÊM NHIỀU ẢNH MỚI -->
+                                <div class="col-12 mt-4">
+                                    <label class="form-label fw-semibold text-primary"><i class="bi bi-plus-circle-fill"></i> Tải lên thêm các hình ảnh mới</label>
                                     <input type="file" id="newImageInput" name="images" multiple accept="image/*" class="form-control">
                                 </div>
 
-                                <!-- Preview ảnh mới -->
+                                <!-- KHỐI 3: PREVIEW CÁC ẢNH MỚI VÀ CHO PHÉP CHỌN LÀM ẢNH CHÍNH -->
                                 <div class="col-12">
-                                    <label class="form-label">Ảnh mới đã chọn</label>
-                                    <div id="newPreviewContainer" class="d-flex flex-wrap gap-3"></div>
+                                    <label class="form-label fw-semibold text-muted">Danh sách ảnh mới đã chọn</label>
+                                    <div id="newPreviewContainer" class="d-flex flex-wrap gap-3 p-3 bg-white rounded border">
+                                        <div class="text-muted small w-100 text-center py-1" id="newPhotoPlaceholder">Chưa có tệp ảnh mới nào được chọn thêm</div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="mt-4 text-end">
-                                <a th:href="@{/products/list_products}" class="btn btn-secondary me-2">Hủy</a>
-                                <button type="submit" class="btn btn-warning px-4">Cập nhật Sản Phẩm</button>
+                            <div class="mt-4 text-end border-top pt-3">
+                                <a th:href="@{/products/list_products}" class="btn btn-secondary me-2 px-4"><i class="bi bi-x-circle"></i> Hủy</a>
+                                <button type="submit" class="btn btn-warning px-5 fw-bold text-dark"><i class="bi bi-cloud-arrow-up-fill"></i> Cập nhật Sản Phẩm</button>
                             </div>
                         </form>
                     </div>
@@ -96,32 +142,60 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT: Điều phối hoạt họa viền xanh và đồng bộ định danh Radio Button ảnh mới -->
     <script>
         const newImageInput = document.getElementById('newImageInput');
         const newPreviewContainer = document.getElementById('newPreviewContainer');
+        const newPhotoPlaceholder = document.getElementById('newPhotoPlaceholder');
 
+        // 1. Quản lý sự kiện đổi ảnh chính ở danh sách ẢNH CŨ
+        document.querySelectorAll('.old-radio-main').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Xóa viền xanh hoạt họa của tất cả item (cả cũ và mới)
+                document.querySelectorAll('.preview-item').forEach(item => item.classList.remove('is-main-active'));
+                // Thêm viền xanh vào item cũ vừa chọn
+                document.getElementById(`old_item_${this.value}`).classList.add('is-main-active');
+            });
+        });
+
+        // 2. Quản lý sự kiện xem trước và chọn ảnh chính ở danh sách ẢNH MỚI TẢI LÊN
         newImageInput.addEventListener('change', function() {
             newPreviewContainer.innerHTML = '';
+
+            if (this.files.length === 0) {
+                newPreviewContainer.appendChild(newPhotoPlaceholder);
+                return;
+            }
 
             Array.from(this.files).forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const div = document.createElement('div');
                     div.className = 'preview-item';
+                    div.id = `new_item_${index}`;
+                    
                     div.innerHTML = `
                         <img src="${e.target.result}" class="preview-img">
-                        <div class="mt-2">
-                            <input type="radio" name="mainImageId" value="new_${index}">
-                            <label class="small">Ảnh chính</label>
+                        <div class="form-check d-flex justify-content-center align-items-center mt-2 mb-0">
+                            <!-- Giá trị value truyền lên định dạng chuỗi: new_0, new_1 khớp logic Java -->
+                            <input class="form-check-input new-radio-main" type="radio" name="mainImageId" value="new_${index}" id="main_new_${index}">
+                            <label class="form-check-label small ms-1" for="main_new_${index}">Ảnh chính</label>
                         </div>
                     `;
                     newPreviewContainer.appendChild(div);
+
+                    // Sự kiện click radio của ảnh mới
+                    div.querySelector('input[type="radio"]').addEventListener('change', function() {
+                        document.querySelectorAll('.preview-item').forEach(item => item.classList.remove('is-main-active'));
+                        document.getElementById(`new_item_${index}`).classList.add('is-main-active');
+                    });
                 };
                 reader.readAsDataURL(file);
             });
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/my_script.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

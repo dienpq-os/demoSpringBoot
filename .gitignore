@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+# Giấu file cấu hình mật khẩu cục bộ
+.env

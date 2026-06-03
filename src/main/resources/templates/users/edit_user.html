@@ -17,6 +17,16 @@
         <div class="row justify-content-center">
             <div class="col-md-6 card shadow p-4 border-0 rounded-4">
                 <h3 class="mb-4 text-center text-primary">Hiệu chỉnh người dùng</h3>
+                <!-- Hiển thị thông báo thành công từ RedirectAttributes (Flash) -->
+                <div th:if="${success}" id="tudongan" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill"></i> <span th:text="${success}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- Hiển thị thông báo lỗi -->
+                <div th:if="${error}" id="tudongan" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 
                 <form th:action="@{/users/update/{id}(id=${user.id})}" th:object="${user}" 
                       method="post" enctype="multipart/form-data">
