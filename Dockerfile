@@ -1,16 +1,10 @@
-# Bước 1: Sử dụng Maven để build dự án
-FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
+FROM eclipse-temurin:21-jre-jammy
+VOLUME /tmp
 
-# Bước 2: Tạo môi trường chạy nhẹ gọn (JRE)
-FROM eclipse-temurin:21-jre-alpine
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+# Tạo một file .env rỗng ngay trong container để thư viện Dotenv đọc thành công
+RUN touch .env
 
-# Mở cổng port ứng dụng
-EXPOSE 8080
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
-# Câu lệnh khởi chạy chính thức
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
