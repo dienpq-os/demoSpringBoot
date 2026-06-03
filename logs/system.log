@@ -2781,3 +2781,488 @@ Caused by: java.lang.RuntimeException: Driver com.mysql.cj.jdbc.Driver claims to
 2026-06-03 18:09:23.392 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-06-03 18:09:23.399 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2026-06-03 18:09:23.429 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-03 20:03:53.798 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-06-03 20:03:53.931 [main] INFO  me.paulschwarz.springdotenv.DotenvPropertySource - Initializing Dotenv with DotenvConfig{directory=null, filename=null, ignoreIfMalformed=false, ignoreIfMissing=true, systemProperties=false, prefix=null}
+2026-06-03 20:03:53.964 [main] INFO  dienpq.RunApplication - Starting RunApplication using Java 21.0.11 with PID 15320 (C:\WORKS\HOC-JAVA\02_SpringProjects\3_Clean_Architecture\target\classes started by admin in C:\WORKS\HOC-JAVA\02_SpringProjects\3_Clean_Architecture)
+2026-06-03 20:03:53.966 [main] INFO  dienpq.RunApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-03 20:03:56.504 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-03 20:03:56.657 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 136 ms. Found 3 JPA repository interfaces.
+2026-06-03 20:03:58.492 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-03 20:03:58.513 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-03 20:03:58.521 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-03 20:03:58.522 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-06-03 20:03:58.649 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-03 20:03:58.649 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4586 ms
+2026-06-03 20:03:59.421 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-03 20:03:59.591 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-06-03 20:03:59.655 [main] INFO  o.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-03 20:04:00.124 [main] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-03 20:04:00.175 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-03 20:04:00.615 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3cc817bd
+2026-06-03 20:04:00.618 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-03 20:04:00.796 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-03 20:04:00.829 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.46
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-03 20:04:02.316 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-03 20:04:02.475 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 20:04:03.330 [main] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-03 20:04:05.312 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-03 20:04:05.382 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name springUserAdapter
+2026-06-03 20:04:06.155 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-03 20:04:07.341 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-03 20:04:07.381 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-06-03 20:04:07.422 [main] INFO  dienpq.RunApplication - Started RunApplication in 14.745 seconds (process running for 16.066)
+2026-06-03 20:04:07.923 [main] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-03 20:04:07.926 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-03 20:04:07.926 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [admin]
+2026-06-03 20:04:14.238 [tomcat-handler-0] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-03 20:04:14.240 [tomcat-handler-0] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-03 20:04:14.242 [tomcat-handler-0] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-06-03 20:04:26.491 [tomcat-handler-7] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-03 20:04:26.505 [tomcat-handler-7] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-03 20:04:26.506 [tomcat-handler-7] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [dienpq@gmail.com]
+2026-06-03 20:04:28.339 [tomcat-handler-14] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    order by
+        pe1_0.masp 
+    limit
+        ?, ?
+2026-06-03 20:04:28.339 [tomcat-handler-14] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [0]
+2026-06-03 20:04:28.339 [tomcat-handler-14] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [10]
+2026-06-03 20:04:28.422 [tomcat-handler-14] DEBUG org.hibernate.SQL - 
+    select
+        sum((pe1_0.gia_ban*pe1_0.so_luong)) 
+    from
+        products pe1_0
+2026-06-03 20:04:49.896 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        products pe1_0 
+    where
+        pe1_0.masp=?
+2026-06-03 20:04:49.897 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:04:49.933 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        products pe1_0 
+    where
+        pe1_0.masp=?
+2026-06-03 20:04:49.934 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:04:49.987 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model,
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        products pe1_0 
+    left join
+        product_image i1_0 
+            on pe1_0.masp=i1_0.product_masp 
+    where
+        pe1_0.masp=?
+2026-06-03 20:04:49.988 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:04:50.096 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        products
+        (gia_ban, hang_san_xuat, so_luong, ten_model, masp) 
+    values
+        (?, ?, ?, ?, ?)
+2026-06-03 20:04:50.105 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:NUMERIC) <- [3432]
+2026-06-03 20:04:50.106 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [SamSung]
+2026-06-03 20:04:50.107 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [5435]
+2026-06-03 20:04:50.108 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [ABCP]
+2026-06-03 20:04:50.110 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [A71]
+2026-06-03 20:04:50.134 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        product_image
+        (image_url, is_main, product_masp) 
+    values
+        (?, ?, ?)
+2026-06-03 20:04:50.137 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [/images/products/a3b77523-300c-4e5c-b900-4a330e0b0d93.jpg]
+2026-06-03 20:04:50.138 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BOOLEAN) <- [false]
+2026-06-03 20:04:50.138 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [A71]
+2026-06-03 20:04:50.185 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        product_image
+        (image_url, is_main, product_masp) 
+    values
+        (?, ?, ?)
+2026-06-03 20:04:50.188 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [/images/products/82ddfc7d-c875-40d1-9293-9a60c136b93f.jpg]
+2026-06-03 20:04:50.188 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BOOLEAN) <- [false]
+2026-06-03 20:04:50.189 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [A71]
+2026-06-03 20:04:50.193 [tomcat-handler-28] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        product_image
+        (image_url, is_main, product_masp) 
+    values
+        (?, ?, ?)
+2026-06-03 20:04:50.197 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [/images/products/b1bd54e6-e5f2-479c-82ad-397762e34071.jpg]
+2026-06-03 20:04:50.197 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BOOLEAN) <- [true]
+2026-06-03 20:04:50.198 [tomcat-handler-28] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [A71]
+2026-06-03 20:04:50.314 [tomcat-handler-29] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    order by
+        pe1_0.masp 
+    limit
+        ?, ?
+2026-06-03 20:04:50.316 [tomcat-handler-29] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [0]
+2026-06-03 20:04:50.317 [tomcat-handler-29] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [10]
+2026-06-03 20:04:50.338 [tomcat-handler-29] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:04:50.339 [tomcat-handler-29] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:04:50.357 [tomcat-handler-29] DEBUG org.hibernate.SQL - 
+    select
+        sum((pe1_0.gia_ban*pe1_0.so_luong)) 
+    from
+        products pe1_0
+2026-06-03 20:04:52.881 [tomcat-handler-37] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    where
+        pe1_0.masp=?
+2026-06-03 20:04:52.883 [tomcat-handler-37] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:04:52.893 [tomcat-handler-37] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:04:52.895 [tomcat-handler-37] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:04.348 [tomcat-handler-45] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    where
+        pe1_0.masp=?
+2026-06-03 20:05:04.349 [tomcat-handler-45] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:04.354 [tomcat-handler-45] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:05:04.354 [tomcat-handler-45] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:04.373 [tomcat-handler-45] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        product_image
+        (image_url, is_main, product_masp) 
+    values
+        (?, ?, ?)
+2026-06-03 20:05:04.376 [tomcat-handler-45] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [/images/products/2bd68f20-bb6a-4ba5-85db-deca4fddd308.jpg]
+2026-06-03 20:05:04.382 [tomcat-handler-45] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BOOLEAN) <- [false]
+2026-06-03 20:05:04.382 [tomcat-handler-45] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [A71]
+2026-06-03 20:05:04.404 [tomcat-handler-45] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        product_image 
+    where
+        id=?
+2026-06-03 20:05:04.405 [tomcat-handler-45] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [32]
+2026-06-03 20:05:04.441 [tomcat-handler-46] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    order by
+        pe1_0.masp 
+    limit
+        ?, ?
+2026-06-03 20:05:04.443 [tomcat-handler-46] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [0]
+2026-06-03 20:05:04.445 [tomcat-handler-46] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [10]
+2026-06-03 20:05:04.454 [tomcat-handler-46] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:05:04.456 [tomcat-handler-46] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:04.468 [tomcat-handler-46] DEBUG org.hibernate.SQL - 
+    select
+        sum((pe1_0.gia_ban*pe1_0.so_luong)) 
+    from
+        products pe1_0
+2026-06-03 20:05:07.061 [tomcat-handler-54] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    where
+        pe1_0.masp=?
+2026-06-03 20:05:07.062 [tomcat-handler-54] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:07.073 [tomcat-handler-54] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:05:07.076 [tomcat-handler-54] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:10.213 [tomcat-handler-64] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    order by
+        pe1_0.masp 
+    limit
+        ?, ?
+2026-06-03 20:05:10.214 [tomcat-handler-64] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [0]
+2026-06-03 20:05:10.215 [tomcat-handler-64] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [10]
+2026-06-03 20:05:10.226 [tomcat-handler-64] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:05:10.227 [tomcat-handler-64] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:10.232 [tomcat-handler-64] DEBUG org.hibernate.SQL - 
+    select
+        sum((pe1_0.gia_ban*pe1_0.so_luong)) 
+    from
+        products pe1_0
+2026-06-03 20:05:13.793 [tomcat-handler-72] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    where
+        pe1_0.masp=?
+2026-06-03 20:05:13.794 [tomcat-handler-72] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:13.805 [tomcat-handler-72] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.product_masp,
+        i1_0.id,
+        i1_0.image_url,
+        i1_0.is_main 
+    from
+        product_image i1_0 
+    where
+        i1_0.product_masp=?
+2026-06-03 20:05:13.806 [tomcat-handler-72] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:13.825 [tomcat-handler-72] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        product_image 
+    where
+        id=?
+2026-06-03 20:05:13.826 [tomcat-handler-72] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [33]
+2026-06-03 20:05:13.829 [tomcat-handler-72] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        product_image 
+    where
+        id=?
+2026-06-03 20:05:13.830 [tomcat-handler-72] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [34]
+2026-06-03 20:05:13.834 [tomcat-handler-72] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        product_image 
+    where
+        id=?
+2026-06-03 20:05:13.835 [tomcat-handler-72] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [35]
+2026-06-03 20:05:13.840 [tomcat-handler-72] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        products 
+    where
+        masp=?
+2026-06-03 20:05:13.841 [tomcat-handler-72] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [A71]
+2026-06-03 20:05:13.874 [tomcat-handler-73] DEBUG org.hibernate.SQL - 
+    select
+        pe1_0.masp,
+        pe1_0.gia_ban,
+        pe1_0.hang_san_xuat,
+        pe1_0.so_luong,
+        pe1_0.ten_model 
+    from
+        products pe1_0 
+    order by
+        pe1_0.masp 
+    limit
+        ?, ?
+2026-06-03 20:05:13.875 [tomcat-handler-73] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [0]
+2026-06-03 20:05:13.876 [tomcat-handler-73] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [10]
+2026-06-03 20:05:13.881 [tomcat-handler-73] DEBUG org.hibernate.SQL - 
+    select
+        sum((pe1_0.gia_ban*pe1_0.so_luong)) 
+    from
+        products pe1_0
+2026-06-03 20:05:20.932 [tomcat-handler-85] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0
+2026-06-03 20:05:23.711 [tomcat-handler-92] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+2026-06-03 20:05:23.713 [tomcat-handler-92] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [34]
+2026-06-03 20:05:32.081 [tomcat-handler-96] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+2026-06-03 20:05:32.082 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:INTEGER) <- [34]
+2026-06-03 20:05:32.114 [tomcat-handler-96] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        email=?,
+        image_url=?,
+        password=?,
+        role=?,
+        username=? 
+    where
+        id=?
+2026-06-03 20:05:32.115 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [duchanhpq@gmail.com]
+2026-06-03 20:05:32.116 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [/images/users/f8fc58bd-4d50-4fc5-8d64-942740e7b8ba.jpg]
+2026-06-03 20:05:32.117 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [$2a$10$Mm5zPT/HNP.i.D4K7RCo4ObelIJ9nyUs03WzPKo/9d9feqeErKSXG]
+2026-06-03 20:05:32.118 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (4:ENUM) <- [KETOAN]
+2026-06-03 20:05:32.118 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [duchanhpq]
+2026-06-03 20:05:32.119 [tomcat-handler-96] TRACE org.hibernate.orm.jdbc.bind - binding parameter (6:INTEGER) <- [34]
+2026-06-03 20:05:32.164 [tomcat-handler-97] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0
+2026-06-03 20:07:19.469 [SpringApplicationShutdownHook] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-03 20:07:19.482 [tomcat-shutdown] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-06-03 20:07:19.494 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 20:07:19.498 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-03 20:07:19.507 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

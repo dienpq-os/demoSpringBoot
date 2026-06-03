@@ -1,22 +1,24 @@
-# --- Giai đoạn 1: Build ứng dụng ---
-FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
+# --- Stage 1: Build ứng dụng (Sửa từ 17 thành 21) ---
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy toàn bộ mã nguồn vào trong container
-COPY . .
+# Sao chép file cấu hình pom.xml và tải trước các thư viện để tận dụng cache
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Biên dịch ra file .jar và bỏ qua chạy thử nghiệm test để tiết kiệm RAM
+# Sao chép toàn bộ mã nguồn và biên dịch ra file .jar
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-# --- Giai đoạn 2: Khởi chạy ứng dụng ---
-FROM eclipse-temurin:21-jre-jammy
+# --- Stage 2: Khởi chạy ứng dụng (Sửa từ 17 thành 21) ---
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Đánh lừa thư viện Dotenv bằng cách tạo sẵn file .env rỗng
-RUN touch .env
-
-# Lấy file .jar đã đóng gói từ giai đoạn 1 sang
+# Sao chép file .jar đã build từ Stage 1 sang Stage 2
 COPY --from=build /app/target/*.jar app.jar
 
-# Chạy ứng dụng Spring Boot
+# Mở cổng mạng
+EXPOSE 8080
+
+# Lệnh khởi chạy ứng dụng Java
 ENTRYPOINT ["java", "-jar", "app.jar"]
