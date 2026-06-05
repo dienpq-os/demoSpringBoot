@@ -1,37 +1,58 @@
-version: '3.8'
-
 services:
   # --- Service 1: Cơ sở dữ liệu MySQL ---
   mysqldb:
     image: mysql:8.0
     container_name: mysql-container
-    ports:
-      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "367284"
-      MYSQL_DATABASE: "demo_springboot"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p367284"]
-      interval: 5s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
       timeout: 5s
       retries: 5
 
   # --- Service 2: Ứng dụng Spring Boot Java ---
   java-app:
-    build: .
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM maven:3.9-eclipse-temurin-21
+        WORKDIR /app
     container_name: my-java-app-container
+    working_dir: /app
+    env_file:
+      - .env
     ports:
       - "8080:8080"
+      - "5005:5005" # Cổng kết nối Debug từ VS Code vào ứng dụng
     environment:
-      # Chú ý: Thay 'host.docker.internal' bằng tên service 'mysqldb'
-      DB_URL: "jdbc:mysql://mysqldb:3306/demo_springboot?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
+      DB_URL: "jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
       DB_USERNAME: "root"
-      DB_PASSWORD: "367284"
+      DB_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      SMTP_USER: "${SMTP_USER}"
+      SMTP_PASS: "${SMTP_PASS}"
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+    volumes:
+      - .:/app
+      # Độc lập thư mục target nội bộ container để tránh nghẽn I/O trên Windows
+      - /app/target/
+      - /app/.mvn/
+      # Cache thư viện Maven từ máy vật lý vào container
+      - ~/.m2:/root/.m2
+    # 🌟 SỬA TẠI ĐÂY: Truyền tham số RAM và Debug trực tiếp vào jvmArguments của plugin Spring Boot
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xms512m -Xmx1024m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       mysqldb:
         condition: service_healthy
+
+    # Tự động khởi động lại container khi file cấu hình pom.xml thay đổi
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pom.xml
 
 volumes:
   mysql_data:

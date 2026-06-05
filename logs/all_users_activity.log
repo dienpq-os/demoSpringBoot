@@ -1,36 +1,37 @@
-2026-06-03 07:22:36 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 08:05:38 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 08:06:01 [admin] INFO  - Tạo user mới thành công: thanhmanph
-2026-06-03 08:34:07 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 08:34:14 [admin] INFO  - Xóa user thành công: thanhmanph
-2026-06-03 08:34:31 [admin] INFO  - Tạo user mới thành công: thanhmanph
-2026-06-03 08:35:25 [admin] INFO  - Xóa user thành công: thanhmanph
-2026-06-03 08:39:03 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 08:39:24 [admin] INFO  - Tạo user mới thành công: thanhmanph
-2026-06-03 08:41:48 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 08:41:56 [admin] INFO  - Xóa user thành công: thanhmanph
-2026-06-03 08:42:15 [admin] INFO  - Tạo user mới thành công: manhaoqn
-2026-06-03 09:13:58 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 09:14:04 [admin] INFO  - Xóa user thành công: manhaoqn
-2026-06-03 09:14:23 [admin] INFO  - Tạo user mới thành công: thanhmanph
-2026-06-03 09:20:04 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 09:20:11 [admin] INFO  - Xóa user thành công: thanhmanph
-2026-06-03 09:27:18 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 09:27:34 [admin] INFO  - Tạo user mới thành công: thanhmanph
-2026-06-03 10:03:03 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 10:50:03 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 12:08:21 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 12:09:02 [admin] INFO  - 📦 Đã thêm mới thành công sản phẩm mã: R59
-2026-06-03 12:09:28 [admin] INFO  - 🗑️ Đã xóa thành công sản phẩm có mã: A71
-2026-06-03 12:09:32 [admin] INFO  - 🗑️ Đã xóa thành công sản phẩm có mã: H49
-2026-06-03 12:09:36 [admin] INFO  - 🗑️ Đã xóa thành công sản phẩm có mã: R59
-2026-06-03 12:09:39 [admin] INFO  - 🗑️ Đã xóa thành công sản phẩm có mã: SH7
-2026-06-03 12:10:10 [admin] INFO  - Cập nhật người dùng thành công : 43
-2026-06-03 12:10:14 [admin] INFO  - Xóa user thành công: thanhmanph
-2026-06-03 12:44:41 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 16:27:14 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 20:04:26 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
-2026-06-03 20:04:50 [admin] INFO  - 📦 Đã thêm mới thành công sản phẩm mã: A71
-2026-06-03 20:05:04 [admin] INFO  - 📝 Đã cập nhật thành công thông tin sản phẩm mã: A71
-2026-06-03 20:05:13 [admin] INFO  - 🗑️ Đã xóa thành công sản phẩm có mã: A71
-2026-06-03 20:05:32 [admin] INFO  - Cập nhật người dùng thành công : 34
+2026-06-05 04:39:44 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
+2026-06-05 06:42:48 [admin] INFO  - 📥 Đăng nhập hệ thống thành công.
+2026-06-05 06:57:54 [admin] INFO  - 📝 Đã cập nhật thành công thông tin sản phẩm mã: AAA
+2026-06-05 06:58:13 [admin] INFO  - 📝 Đã cập nhật thành công thông tin sản phẩm mã: AAA
+2026-06-05 06:59:04 [admin] INFO  - 📝 Đã cập nhật thành công thông tin sản phẩm mã: AAA
+2026-06-05 06:59:23 [admin] INFO  - 📝 Đã cập nhật thành công thông tin sản phẩm mã: AAA
+2026-06-05 06:59:35 [admin] INFO  - 🗑️ Đã xóa thành công sản phẩm có mã: AAA
+2026-06-05 06:59:54 [admin] INFO  - 📦 Đã thêm mới thành công sản phẩm mã: H49
+2026-06-05 07:00:10 [admin] INFO  - 📝 Đã cập nhật thành công thông tin sản phẩm mã: H49
+2026-06-05 07:04:02 [admin] INFO  - Xóa user thành công: duchanhpq
+2026-06-05 07:04:11 [admin] INFO  - Cập nhật người dùng thành công : 1
+2026-06-05 07:04:40 [admin] INFO  - Cập nhật người dùng thành công : 1
+2026-06-05 08:06:00 [admin] INFO  - 📥 Đăng nhập thành công. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 08:09:58 [admin] INFO  - 📤 Đăng xuất khỏi hệ thống. [IP: 172.18.0.1]
+2026-06-05 08:10:07 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 08:10:18 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 08:10:58 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:09:31 [admin] INFO  - 📥 Đăng nhập thành công. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:42:37 [duchanhpq] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Bad credentials. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:42:48 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:43:20 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:43:32 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Bad credentials. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:43:58 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:45:58 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:54:35 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:55:06 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:56:23 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 09:58:23 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:02:39 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:06:35 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:11:24 [admin] INFO  - 📥 Đăng nhập thành công. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:19:50 [admin] INFO  - Cập nhật người dùng thành công : 1
+2026-06-05 10:20:06 [admin] INFO  - 📤 Đăng xuất khỏi hệ thống. [IP: 172.18.0.1]
+2026-06-05 10:20:20 [admin] INFO  - 📥 Đăng nhập thành công. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:20:59 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:37:54 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]
+2026-06-05 10:38:20 [dienpq@gmail.com] INFO  - ❌ Đăng nhập THẤT BẠI. Lý do: Maximum sessions of 1 for this principal exceeded. [IP: 172.18.0.1] [Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36]

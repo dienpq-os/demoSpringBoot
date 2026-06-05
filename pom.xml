@@ -102,12 +102,20 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- 2. SỬA: Dùng bộ thư viện Test chuẩn duy nhất của Spring Boot -->
+		<!-- 2. Dùng bộ thư viện Test chuẩn duy nhất của Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+<!--Đồng bộ DDOCKERR: Tự động khởi động lại khi phát hiện có thay đổi ở file .class-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
