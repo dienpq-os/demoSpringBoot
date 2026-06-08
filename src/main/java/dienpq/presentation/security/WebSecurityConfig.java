@@ -1,4 +1,4 @@
-package dienpq.presentation.controller.security;
+package dienpq.presentation.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import dienpq.domain.port.external.PasswordServicePort;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @EnableMethodSecurity // Kích hoạt @PreAuthorize phòng thủ chiều sâu tại tầng Controller/Service
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class WebSecurityConfig {
         private final AuthHandlerService authHandler;
         private final PasswordServicePort passwordServicePort;
 

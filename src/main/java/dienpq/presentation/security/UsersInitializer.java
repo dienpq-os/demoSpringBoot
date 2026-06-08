@@ -1,4 +1,4 @@
-package dienpq.presentation.controller.security;
+package dienpq.presentation.security;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

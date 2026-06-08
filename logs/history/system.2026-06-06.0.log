@@ -1,0 +1,327 @@
+2026-06-06 02:57:18.492 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-06-06 02:57:18.644 [restartedMain] INFO  me.paulschwarz.springdotenv.DotenvPropertySource - Initializing Dotenv with DotenvConfig{directory=null, filename=null, ignoreIfMalformed=false, ignoreIfMissing=true, systemProperties=false, prefix=null}
+2026-06-06 02:57:18.690 [restartedMain] INFO  dienpq.RunApplication - Starting RunApplication using Java 21.0.11 with PID 97 (/app/target/classes started by root in /app)
+2026-06-06 02:57:18.692 [restartedMain] INFO  dienpq.RunApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-06 02:57:18.794 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-06-06 02:57:18.795 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-06-06 02:57:23.429 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-06 02:57:23.667 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 197 ms. Found 3 JPA repository interfaces.
+2026-06-06 02:57:28.542 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-06 02:57:28.577 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-06 02:57:28.586 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-06 02:57:28.587 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-06-06 02:57:29.212 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-06 02:57:29.213 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 10416 ms
+2026-06-06 02:57:30.598 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-06 02:57:31.053 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-06-06 02:57:31.295 [restartedMain] INFO  o.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-06 02:57:33.345 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-06 02:57:33.483 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-06 02:57:34.318 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6cc4968b
+2026-06-06 02:57:34.329 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-06 02:57:34.575 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-06 02:57:34.671 [restartedMain] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.46
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-06 02:57:40.409 [restartedMain] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-06 02:57:40.783 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 02:57:42.752 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-06 02:57:45.436 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name springUserAdapter
+2026-06-06 02:57:46.042 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-06 02:57:47.502 [restartedMain] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-06 02:57:49.485 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-06 02:57:49.674 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-06 02:57:49.695 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-06-06 02:57:49.714 [restartedMain] INFO  dienpq.RunApplication - Started RunApplication in 33.921 seconds (process running for 39.443)
+2026-06-06 02:57:50.558 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-06 02:57:50.565 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 02:57:50.566 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [admin]
+2026-06-06 03:02:37.387 [tomcat-handler-0] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-06 03:02:37.388 [tomcat-handler-0] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-06 03:02:37.394 [tomcat-handler-0] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-06-06 03:02:51.440 [tomcat-handler-8] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-06 03:02:51.448 [tomcat-handler-8] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 03:02:51.449 [tomcat-handler-8] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 04:10:06.373 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-06-06 04:10:06.617 [restartedMain] INFO  me.paulschwarz.springdotenv.DotenvPropertySource - Initializing Dotenv with DotenvConfig{directory=null, filename=null, ignoreIfMalformed=false, ignoreIfMissing=true, systemProperties=false, prefix=null}
+2026-06-06 04:10:06.701 [restartedMain] INFO  dienpq.RunApplication - Starting RunApplication using Java 21.0.11 with PID 76 (/app/target/classes started by root in /app)
+2026-06-06 04:10:06.704 [restartedMain] INFO  dienpq.RunApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-06 04:10:07.124 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-06-06 04:10:07.132 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-06-06 04:10:14.672 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-06 04:10:15.192 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 484 ms. Found 3 JPA repository interfaces.
+2026-06-06 04:10:19.033 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-06 04:10:19.063 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-06 04:10:19.071 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-06 04:10:19.072 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-06-06 04:10:19.180 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-06 04:10:19.182 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 12044 ms
+2026-06-06 04:10:20.520 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-06 04:10:20.837 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-06-06 04:10:21.097 [restartedMain] INFO  o.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-06 04:10:25.996 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-06 04:10:26.257 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-06 04:10:29.529 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@32539321
+2026-06-06 04:10:29.539 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-06 04:10:30.307 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-06 04:10:30.451 [restartedMain] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.46
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-06 04:10:37.168 [restartedMain] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-06 04:10:37.681 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table product_image (
+        id bigint not null auto_increment,
+        image_url varchar(500) not null,
+        is_main bit not null,
+        product_masp varchar(20),
+        primary key (id)
+    ) engine=InnoDB
+2026-06-06 04:10:38.094 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table products (
+        masp varchar(20) not null,
+        gia_ban decimal(15,2) not null,
+        hang_san_xuat varchar(50) not null,
+        so_luong integer not null,
+        ten_model varchar(100) not null,
+        primary key (masp)
+    ) engine=InnoDB
+2026-06-06 04:10:38.231 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table users (
+        id integer not null auto_increment,
+        email varchar(255) not null,
+        image_url varchar(500),
+        password varchar(255) not null,
+        role enum ('ADMIN','HANHCHINH','KETOAN'),
+        username varchar(255),
+        primary key (id)
+    ) engine=InnoDB
+2026-06-06 04:10:38.595 [restartedMain] DEBUG org.hibernate.SQL - 
+    create index idx_product_image_masp 
+       on product_image (product_masp)
+2026-06-06 04:10:38.965 [restartedMain] DEBUG org.hibernate.SQL - 
+    create index idx_product_ten_model 
+       on products (ten_model)
+2026-06-06 04:10:39.100 [restartedMain] DEBUG org.hibernate.SQL - 
+    create index idx_product_hang_san_xuat 
+       on products (hang_san_xuat)
+2026-06-06 04:10:39.210 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       drop index UK6dotkott2kjsp8vw4d0m25fb7
+2026-06-06 04:10:39.477 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email)
+2026-06-06 04:10:39.595 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       drop index UKr43af9ap4edm43mmtq01oddj6
+2026-06-06 04:10:39.601 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add constraint UKr43af9ap4edm43mmtq01oddj6 unique (username)
+2026-06-06 04:10:39.715 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table product_image 
+       add constraint FKjh1ulphgedr9vyc6grlel8jfr 
+       foreign key (product_masp) 
+       references products (masp)
+2026-06-06 04:10:40.029 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 04:10:42.984 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-06 04:10:45.763 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name springUserAdapter
+2026-06-06 04:10:46.428 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-06 04:10:48.009 [restartedMain] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-06 04:10:51.014 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-06 04:10:51.472 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-06 04:10:51.514 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-06-06 04:10:51.542 [restartedMain] INFO  dienpq.RunApplication - Started RunApplication in 47.582 seconds (process running for 49.061)
+2026-06-06 04:10:53.649 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-06 04:10:53.672 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 04:10:53.674 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [admin]
+2026-06-06 04:10:55.670 [restartedMain] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (email, image_url, password, role, username) 
+    values
+        (?, ?, ?, ?, ?)
+2026-06-06 04:10:55.693 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 04:10:55.693 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [null]
+2026-06-06 04:10:55.696 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [$2a$12$n.b7gzFdBOaazUu52NwUAeLcmxW4lHY2794XgweZ22Sk1dnWEp5Li]
+2026-06-06 04:10:55.697 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (4:ENUM) <- [ADMIN]
+2026-06-06 04:10:55.699 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [admin]
+2026-06-06 04:11:21.788 [SpringApplicationShutdownHook] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-06 04:11:22.085 [tomcat-shutdown] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-06-06 04:11:22.245 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 04:11:22.738 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-06 04:11:23.178 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-06 04:12:29.975 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-06-06 04:12:30.162 [restartedMain] INFO  me.paulschwarz.springdotenv.DotenvPropertySource - Initializing Dotenv with DotenvConfig{directory=null, filename=null, ignoreIfMalformed=false, ignoreIfMissing=true, systemProperties=false, prefix=null}
+2026-06-06 04:12:30.244 [restartedMain] INFO  dienpq.RunApplication - Starting RunApplication using Java 21.0.11 with PID 56 (/app/target/classes started by root in /app)
+2026-06-06 04:12:30.247 [restartedMain] INFO  dienpq.RunApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-06 04:12:31.111 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-06-06 04:12:31.115 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-06-06 04:12:36.944 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-06 04:12:37.411 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 432 ms. Found 3 JPA repository interfaces.
+2026-06-06 04:12:42.071 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-06 04:12:42.139 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-06 04:12:42.146 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-06 04:12:42.148 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-06-06 04:12:42.236 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-06 04:12:42.238 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 11095 ms
+2026-06-06 04:12:43.721 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-06 04:12:44.013 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-06-06 04:12:44.158 [restartedMain] INFO  o.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-06 04:12:46.650 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-06 04:12:47.124 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-06 04:12:48.571 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@28e68b27
+2026-06-06 04:12:48.584 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-06 04:12:49.749 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-06 04:12:49.851 [restartedMain] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.46
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-06 04:12:55.579 [restartedMain] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-06 04:12:56.894 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 04:13:01.690 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-06 04:13:05.390 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name springUserAdapter
+2026-06-06 04:13:06.701 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-06 04:13:08.425 [restartedMain] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-06 04:13:11.429 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-06 04:13:12.003 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-06 04:13:12.070 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-06-06 04:13:12.124 [restartedMain] INFO  dienpq.RunApplication - Started RunApplication in 43.889 seconds (process running for 45.113)
+2026-06-06 04:13:15.404 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-06 04:13:15.522 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 04:13:15.532 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [admin]
+2026-06-06 04:30:18.496 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m27s752ms467µs782ns).
+2026-06-06 04:32:05.180 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s669ms270µs539ns).
+2026-06-06 05:01:00.114 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m9s892ms168µs512ns).
+2026-06-06 05:03:07.195 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m36s797ms588µs45ns).
+2026-06-06 05:05:37.289 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m30s71ms758µs56ns).
+2026-06-06 05:07:18.688 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m41s398ms905µs596ns).
+2026-06-06 05:14:41.483 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m52s662ms362µs744ns).
+2026-06-06 05:15:33.307 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s872ms684µs339ns).
+2026-06-06 05:16:46.304 [SpringApplicationShutdownHook] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-06 05:16:46.895 [tomcat-shutdown] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-06-06 05:16:48.021 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 05:16:49.366 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-06 05:16:49.851 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-06 06:40:00.049 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-06-06 06:40:00.266 [restartedMain] INFO  me.paulschwarz.springdotenv.DotenvPropertySource - Initializing Dotenv with DotenvConfig{directory=null, filename=null, ignoreIfMalformed=false, ignoreIfMissing=true, systemProperties=false, prefix=null}
+2026-06-06 06:40:00.355 [restartedMain] INFO  dienpq.RunApplication - Starting RunApplication using Java 21.0.11 with PID 57 (/app/target/classes started by root in /app)
+2026-06-06 06:40:00.359 [restartedMain] INFO  dienpq.RunApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-06 06:40:00.593 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-06-06 06:40:00.594 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-06-06 06:40:06.142 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-06 06:40:06.534 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 353 ms. Found 3 JPA repository interfaces.
+2026-06-06 06:40:10.538 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-06 06:40:10.573 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-06 06:40:10.579 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-06 06:40:10.583 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-06-06 06:40:10.686 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-06 06:40:10.687 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 10089 ms
+2026-06-06 06:40:11.833 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-06 06:40:12.110 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-06-06 06:40:12.227 [restartedMain] INFO  o.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-06 06:40:13.321 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-06 06:40:13.425 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-06 06:40:14.428 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@32539321
+2026-06-06 06:40:14.435 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-06 06:40:14.703 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-06 06:40:14.754 [restartedMain] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.46
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-06 06:40:17.928 [restartedMain] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-06 06:40:18.190 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 06:40:19.617 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-06 06:40:21.608 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name springUserAdapter
+2026-06-06 06:40:22.136 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-06 06:40:23.403 [restartedMain] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-06 06:40:25.240 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-06 06:40:25.425 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-06 06:40:25.444 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-06-06 06:40:25.466 [restartedMain] INFO  dienpq.RunApplication - Started RunApplication in 26.885 seconds (process running for 28.001)
+2026-06-06 06:40:28.235 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        ue1_0.id,
+        ue1_0.email,
+        ue1_0.image_url,
+        ue1_0.password,
+        ue1_0.role,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.email=? 
+        or ue1_0.username=?
+2026-06-06 06:40:28.240 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [dienpq@gmail.com]
+2026-06-06 06:40:28.243 [restartedMain] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [admin]
+2026-06-06 08:03:40.598 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h50m47s826ms113µs360ns).
+2026-06-06 08:03:45.045 [SpringApplicationShutdownHook] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-06 08:03:45.065 [tomcat-shutdown] INFO  o.s.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-06-06 08:03:45.094 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-06 08:03:45.123 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-06 08:03:45.132 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -33,4 +33,4 @@ build/
 .vscode/
 # Giấu file cấu hình mật khẩu cục bộ
 .env
-logs/
+logs/logs/ 

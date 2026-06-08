@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,5 +27,14 @@ public class BeanConfig {
     @Bean
     public JsonSerializerPort jsonSerializerPort(ObjectMapper objectMapper) {
         return new JacksonSerializerAdapter(objectMapper);
+    }
+
+    // Khởi tạo và nạp Bean AuthenticationManager vào Context của Spring Application
+    // Phục vụ trực tiếp cho việc xác thực tài khoản thủ công tại ApiAuthController
+    // (Luồng JWT)
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

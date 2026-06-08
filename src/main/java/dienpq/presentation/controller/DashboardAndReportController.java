@@ -1,7 +1,6 @@
 package dienpq.presentation.controller;
 
 import dienpq.application.dto.DashboardSummary;
-import dienpq.application.service.ProductAppService;
 import dienpq.domain.port.external.PDFServicePort;
 import dienpq.application.service.DashboardAndReportService;
 import dienpq.presentation.dto.ProductResponse; // Import DTO tầng Presentation

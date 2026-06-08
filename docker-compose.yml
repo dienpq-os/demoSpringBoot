@@ -2,18 +2,19 @@ services:
   # --- Service 1: Cơ sở dữ liệu MySQL ---
   mysqldb:
     image: mysql:8.0
+    restart: unless-stopped
     container_name: mysql-container
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_DATABASE}"
     volumes:
       - mysql_data:/var/lib/mysql
+    # SỬA TẠI ĐÂY: Dùng lệnh quét cổng TCP nội bộ siêu nhanh, không phụ thuộc vào mật khẩu root
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
-      interval: 10s
-      timeout: 5s
+      test: ["CMD-SHELL", "cat < /dev/null > /dev/tcp/127.0.0.1/3306"]
+      interval: 5s
+      timeout: 3s
       retries: 5
-
   # --- Service 2: Ứng dụng Spring Boot Java ---
   java-app:
     build:
@@ -21,6 +22,7 @@ services:
       dockerfile_inline: |
         FROM maven:3.9-eclipse-temurin-21
         WORKDIR /app
+    restart: unless-stopped    
     container_name: my-java-app-container
     working_dir: /app
     env_file:
@@ -37,7 +39,7 @@ services:
       SPRING_DEVTOOLS_RESTART_ENABLED: "true"
     volumes:
       - .:/app
-      # Độc lập thư mục target nội bộ container để tránh nghẽn I/O trên Windows
+      # Độc lập thư mục target nội bộ container để tránh nghẽn I/O trên Windows/VirtualBox Shared Folder
       - /app/target/
       - /app/.mvn/
       # Cache thư viện Maven từ máy vật lý vào container
@@ -47,12 +49,10 @@ services:
     depends_on:
       mysqldb:
         condition: service_healthy
-
     # Tự động khởi động lại container khi file cấu hình pom.xml thay đổi
     develop:
       watch:
         - action: rebuild
           path: ./pom.xml
-
 volumes:
   mysql_data:

@@ -1,4 +1,4 @@
-package dienpq.presentation.controller.security;
+package dienpq.presentation.security;
 
 import java.io.IOException;
 import java.security.Principal;
